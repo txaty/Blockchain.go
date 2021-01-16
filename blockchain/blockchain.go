@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	dbPath      = "/tmp/blocks"
-	dbFile      = "/tmp/blocks/MANIFEST" // verity if blockchain database exists
+	dbPath      = "tmp/blocks"
+	dbFile      = "tmp/blocks/MANIFEST" // verity if blockchain database exists
 	genesisData = "First Transaction from Genesis"
 )
 

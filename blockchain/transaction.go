@@ -16,19 +16,6 @@ type Transaction struct {
 	Outputs []TxOutput
 }
 
-// TxOutput records transaction output
-type TxOutput struct {
-	Value  int
-	PubKey string
-}
-
-// TxInput records transaction input
-type TxInput struct {
-	ID  []byte
-	Out int
-	Sig string
-}
-
 // CoinbaseTx issue the rewards for miner who mines the coin base
 // Coin base is the first transaction in Gensis block
 func CoinbaseTx(to, data string) *Transaction {
@@ -51,16 +38,6 @@ func CoinbaseTx(to, data string) *Transaction {
 func (tx *Transaction) IsCoinBase() bool {
 	// There is only one transaction, transaction ID is 0, and input's out index is -1
 	return len(tx.Inputs) == 1 && len(tx.Inputs[0].ID) == 0 && tx.Inputs[0].Out == -1
-}
-
-// CanUnlock checks the validity of transaction input
-func (in *TxInput) CanUnlock(data string) bool {
-	return in.Sig == data
-}
-
-// CanBeUnlocked checks the validity of transaction output
-func (out *TxOutput) CanBeUnlocked(data string) bool {
-	return out.PubKey == data
 }
 
 // SetID creates hash ID for the transaction
