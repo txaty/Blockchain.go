@@ -21,7 +21,7 @@ Requirements: the first few bytes must contain 0s
 */
 
 // Difficulty means the first "Difficulty" digits of the hash must be zero
-const Difficulty = 18
+const Difficulty = 16
 
 // ProofOfWork is the structure for proof of work
 type ProofOfWork struct {
