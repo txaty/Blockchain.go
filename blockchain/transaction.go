@@ -26,16 +26,19 @@ type Transaction struct {
 // Coin base is the first transaction in Gensis block
 func CoinbaseTx(to, data string) *Transaction {
 	if data == "" {
-		data = fmt.Sprintf("Coin to %s", to)
+		randData := make([]byte, 24)
+		_, err := rand.Read(randData)
+		Handle(err)
+		data = fmt.Sprintf("%x", randData)
 	}
 
 	// No output
 	txin := TxInput{[]byte{}, -1, nil, []byte(data)}
 	// Reward 100
-	txout := NewTXOutput(100, to)
+	txout := NewTXOutput(20, to)
 
 	tx := Transaction{nil, []TxInput{txin}, []TxOutput{*txout}}
-	tx.SetID()
+	tx.ID = tx.Hash()
 
 	return &tx
 }
